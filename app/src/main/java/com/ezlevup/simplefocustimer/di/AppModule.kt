@@ -7,6 +7,7 @@ import com.ezlevup.simplefocustimer.domain.repository.FocusRepository
 import com.ezlevup.simplefocustimer.domain.usecase.GetFocusHistoryUseCase
 import com.ezlevup.simplefocustimer.domain.usecase.SaveFocusSessionUseCase
 import com.ezlevup.simplefocustimer.domain.usecase.StartTimerUseCase
+import com.ezlevup.simplefocustimer.presentation.history.HistoryViewModel
 import com.ezlevup.simplefocustimer.presentation.timer.TimerViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -32,6 +33,9 @@ val useCaseModule = module {
     factory { GetFocusHistoryUseCase(get()) }
 }
 
-val viewModelModule = module { viewModel { TimerViewModel(get(), get()) } }
+val viewModelModule = module {
+    viewModel { TimerViewModel(get(), get()) }
+    viewModel { HistoryViewModel(get()) }
+}
 
 val appModule = listOf(databaseModule, repositoryModule, useCaseModule, viewModelModule)
