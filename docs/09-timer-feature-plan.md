@@ -6,7 +6,7 @@
 ## 변경 제안
 
 ### ViewModel
-#### [NEW] [TimerViewModel.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/presentation/timer/TimerViewModel.kt)
+#### [NEW] [TimerViewModel.kt](../app/src/main/java/com/ezlevup/simplefocustimer/presentation/timer/TimerViewModel.kt)
 - **State**: `TimerUiState`
     - `currentTime`: Long (남은 시간, 초 단위)
     - `totalTime`: Long (기본값 25 * 60)
@@ -19,7 +19,7 @@
     - `onTimerFinished()`: `SaveFocusSessionUseCase` 호출하여 세션 저장.
 
 ### UI 컴포넌트
-#### [NEW] [TimerScreen.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/presentation/timer/TimerScreen.kt)
+#### [NEW] [TimerScreen.kt](../app/src/main/java/com/ezlevup/simplefocustimer/presentation/timer/TimerScreen.kt)
 - **구성 요소**:
     - `Box`: 중앙 정렬용.
     - `CircularProgressIndicator`: 원형 진행바.
@@ -28,15 +28,15 @@
 - **내비게이션**:
     - 기록(History) 화면으로 이동하는 기능 필요 (UI 상단이나 하단 버튼).
 
-#### [NEW] [TimerComponents.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/presentation/timer/components/TimerComponents.kt)
+#### [NEW] [TimerComponents.kt](../app/src/main/java/com/ezlevup/simplefocustimer/presentation/timer/components/TimerComponents.kt)
 - (선택 사항) UI가 복잡해지면 재사용 가능한 컴포넌트로 분리. (일단은 `TimerScreen.kt`에 단순하게 유지).
 
 ### 의존성 주입 (DI)
-#### [MODIFY] [AppModule.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt)
+#### [MODIFY] [AppModule.kt](../app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt)
 - `viewModelModule`에 `viewModel { TimerViewModel(get(), get()) }` 추가.
 
 ### 내비게이션
-#### [MODIFY] [SimpleFocusNavHost.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/presentation/navigation/SimpleFocusNavHost.kt)
+#### [MODIFY] [SimpleFocusNavHost.kt](../app/src/main/java/com/ezlevup/simplefocustimer/presentation/navigation/SimpleFocusNavHost.kt)
 - `TimerScreen` 플레이스홀더를 실제 `TimerScreen` Composable로 교체.
 
 ## 검증 계획

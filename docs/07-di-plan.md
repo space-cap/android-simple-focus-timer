@@ -6,14 +6,14 @@ Database, Data Layer (Repository), Domain Layer (Use Cases), Presentation Layer 
 ## 변경 제안
 
 ### Koin 모듈
-#### [NEW] [AppModule.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt)
+#### [NEW] [AppModule.kt](../app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt)
 - `databaseModule`: `SimpleFocusDatabase` 및 `FocusSessionDao` 제공.
 - `repositoryModule`: `FocusRepositoryImpl`을 `FocusRepository`에 바인딩.
 - `useCaseModule`: `StartTimerUseCase`, `SaveFocusSessionUseCase`, `GetFocusHistoryUseCase` 제공.
 - `viewModelModule`: 현재는 비워 둠 (나중에 채워질 예정).
 
 ### Application 클래스 업데이트
-#### [MODIFY] [SimpleFocusTimerApp.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/SimpleFocusTimerApp.kt)
+#### [MODIFY] [SimpleFocusTimerApp.kt](../app/src/main/java/com/ezlevup/simplefocustimer/SimpleFocusTimerApp.kt)
 - 정의된 모듈들을 `startKoin { modules(...) }`에 추가.
 
 ## 검증 계획

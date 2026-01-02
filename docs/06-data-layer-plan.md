@@ -6,7 +6,7 @@
 ## 변경 제안
 
 ### Room Entity
-#### [NEW] [FocusSessionEntity.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/data/local/entity/FocusSessionEntity.kt)
+#### [NEW] [FocusSessionEntity.kt](../app/src/main/java/com/ezlevup/simplefocustimer/data/local/entity/FocusSessionEntity.kt)
 - `@Entity(tableName = "focus_sessions")`
 - 필드:
     - `@PrimaryKey(autoGenerate = true) val id: Long = 0`
@@ -14,26 +14,26 @@
     - `val durationSeconds: Long`
 
 ### Room DAO
-#### [NEW] [FocusSessionDao.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/data/local/dao/FocusSessionDao.kt)
+#### [NEW] [FocusSessionDao.kt](../app/src/main/java/com/ezlevup/simplefocustimer/data/local/dao/FocusSessionDao.kt)
 - `@Dao` 인터페이스.
 - 함수:
     - `@Insert(onConflict = OnConflictStrategy.REPLACE) suspend fun insertSession(session: FocusSessionEntity)`
     - `@Query("SELECT * FROM focus_sessions ORDER BY startTime DESC") fun getAllSessions(): Flow<List<FocusSessionEntity>>`
 
 ### Room Database
-#### [NEW] [SimpleFocusDatabase.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/data/local/SimpleFocusDatabase.kt)
+#### [NEW] [SimpleFocusDatabase.kt](../app/src/main/java/com/ezlevup/simplefocustimer/data/local/SimpleFocusDatabase.kt)
 - `@Database(entities = [FocusSessionEntity::class], version = 1)`
 - `RoomDatabase`를 상속받는 추상 클래스.
 - 추상 메서드 `abstract fun focusSessionDao(): FocusSessionDao`
 
 ### 매퍼 (Mapper)
-#### [NEW] [FocusMapper.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/data/mapper/FocusMapper.kt)
+#### [NEW] [FocusMapper.kt](../app/src/main/java/com/ezlevup/simplefocustimer/data/mapper/FocusMapper.kt)
 - `FocusSession` (Domain)과 `FocusSessionEntity` (Data) 간의 변환을 위한 확장 함수.
 - `FocusSessionEntity.toDomainModel(): FocusSession`
 - `FocusSession.toEntity(): FocusSessionEntity`
 
 ### 리포지토리 구현 (Repository Implementation)
-#### [NEW] [FocusRepositoryImpl.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/data/repository/FocusRepositoryImpl.kt)
+#### [NEW] [FocusRepositoryImpl.kt](../app/src/main/java/com/ezlevup/simplefocustimer/data/repository/FocusRepositoryImpl.kt)
 - `FocusRepository` 인터페이스 구현.
 - `FocusSessionDao` 주입.
 - `FocusMapper`를 사용하여 데이터 변환 수행.

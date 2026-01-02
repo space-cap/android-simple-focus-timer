@@ -10,7 +10,7 @@
 ## 변경 제안
 
 ### Gradle 설정 (`gradle/libs.versions.toml`)
-#### [MODIFY] [libs.versions.toml](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/gradle/libs.versions.toml)
+#### [MODIFY] [libs.versions.toml](../gradle/libs.versions.toml)
 - 버전 추가:
     - Koin (4.0.0)
     - Room (2.6.1)
@@ -24,7 +24,7 @@
     - `ksp` (Room 컴파일러용)
 
 ### 앱 빌드 설정 (`app/build.gradle.kts`)
-#### [MODIFY] [build.gradle.kts](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/build.gradle.kts)
+#### [MODIFY] [build.gradle.kts](../app/build.gradle.kts)
 - KSP 플러그인 적용.
 - Koin, Room(runtime, ktx), Coroutines 구현 의존성 추가.
 - Room 컴파일러를 위한 KSP 프로세서 추가.
@@ -45,10 +45,10 @@
 - `di`
 
 ### Application 클래스
-#### [NEW] [SimpleFocusTimerApp.kt](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/SimpleFocusTimerApp.kt)
+#### [NEW] [SimpleFocusTimerApp.kt](../app/src/main/java/com/ezlevup/simplefocustimer/SimpleFocusTimerApp.kt)
 - `Application` 클래스 상속.
 - `onCreate`에서 Koin 초기화 (현재는 빈 모듈 리스트 사용).
 - `AndroidManifest.xml`에 등록.
 
-#### [MODIFY] [AndroidManifest.xml](file:///c:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/AndroidManifest.xml)
+#### [MODIFY] [AndroidManifest.xml](../app/src/main/AndroidManifest.xml)
 - `android:name=".SimpleFocusTimerApp"` 속성 추가.
