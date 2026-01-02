@@ -176,6 +176,11 @@ app/src/main/java/com/ezlevup/simplefocustimer/
 - [08-프레젠테이션-기본](docs/08-presentation-base-plan.md)
 - [09-타이머-기능](docs/09-timer-feature-plan.md)
 - [10-기록-기능](docs/10-history-feature-plan.md)
+- [11-기술-결정-이유](docs/11-tech-stack-decisions.md)
+- [12-트러블슈팅-및-교훈](docs/12-troubleshooting-lessons.md)
+- [13-향후-로드맵](docs/13-future-roadmap.md)
+- [14-테스트-전략](docs/14-testing-strategy.md)
+- [15-컨벤션-가이드](docs/15-convention-guide.md)
 
 ## 🤝 기여하기
 
