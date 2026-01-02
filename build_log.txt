@@ -1,3 +1,4 @@
+Starting a Gradle Daemon, 1 incompatible and 2 stopped Daemons could not be reused, use --status for details
 > Task :app:preBuild UP-TO-DATE
 > Task :app:preDebugBuild UP-TO-DATE
 > Task :app:mergeDebugNativeDebugMetadata NO-SOURCE
@@ -13,11 +14,8 @@
 > Task :app:parseDebugLocalResources UP-TO-DATE
 > Task :app:createDebugCompatibleScreenManifests UP-TO-DATE
 > Task :app:extractDeepLinksDebug UP-TO-DATE
-> Task :app:processDebugMainManifest UP-TO-DATE
-> Task :app:processDebugManifest UP-TO-DATE
-> Task :app:processDebugManifestForPackage UP-TO-DATE
-> Task :app:processDebugResources UP-TO-DATE
-> Task :app:kspDebugKotlin UP-TO-DATE
+> Task :app:processDebugMainManifest
+> Task :app:processDebugManifest
 > Task :app:javaPreCompileDebug UP-TO-DATE
 > Task :app:mergeDebugShaders UP-TO-DATE
 > Task :app:compileDebugShaders NO-SOURCE
@@ -27,26 +25,14 @@
 > Task :app:checkDebugDuplicateClasses UP-TO-DATE
 > Task :app:desugarDebugFileDependencies UP-TO-DATE
 > Task :app:mergeExtDexDebug UP-TO-DATE
-> Task :app:mergeLibDexDebug UP-TO-DATE
-> Task :app:mergeDebugJniLibFolders UP-TO-DATE
-> Task :app:mergeDebugNativeLibs UP-TO-DATE
-> Task :app:stripDebugDebugSymbols UP-TO-DATE
-> Task :app:validateSigningDebug UP-TO-DATE
-> Task :app:writeDebugAppMetadata UP-TO-DATE
-> Task :app:writeDebugSigningConfigVersions UP-TO-DATE
-
-> Task :app:compileDebugKotlin FAILED
-e: file:///C:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt:37:5 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///C:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt:37:15 Cannot infer type for this parameter. Please specify it explicitly.
-e: file:///C:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt:37:17 Unresolved reference 'HistoryViewModel'.
-e: file:///C:/workdir/space-cap/AndroidStudioProjects/SimpleFocusTimer/app/src/main/java/com/ezlevup/simplefocustimer/di/AppModule.kt:37:34 Cannot infer type for this parameter. Please specify it explicitly.
+> Task :app:processDebugManifestForPackage
+> Task :app:processDebugResources FAILED
 
 FAILURE: Build failed with an exception.
 
 * What went wrong:
-Execution failed for task ':app:compileDebugKotlin'.
-> A failure occurred while executing org.jetbrains.kotlin.compilerRunner.GradleCompilerRunnerWithWorkers$GradleKotlinCompilerWorkAction
-   > Compilation error. See log for more details
+Execution failed for task ':app:processDebugResources'.
+> java.io.IOException: Couldn't delete C:\workdir\space-cap\AndroidStudioProjects\SimpleFocusTimer\app\build\intermediates\compile_and_runtime_not_namespaced_r_class_jar\debug\processDebugResources\R.jar
 
 * Try:
 > Run with --stacktrace option to get the stack trace.
@@ -54,5 +40,5 @@ Execution failed for task ':app:compileDebugKotlin'.
 > Run with --scan to get full insights.
 > Get more help at https://help.gradle.org.
 
-BUILD FAILED in 5s
-31 actionable tasks: 1 executed, 30 up-to-date
+BUILD FAILED in 36s
+22 actionable tasks: 4 executed, 18 up-to-date

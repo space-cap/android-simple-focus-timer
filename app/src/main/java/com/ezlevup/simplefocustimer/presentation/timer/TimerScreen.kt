@@ -16,16 +16,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.History
-import androidx.compose.material.icons.filled.Pause
-import androidx.compose.material.icons.filled.PlayArrow
-import androidx.compose.material.icons.filled.Stop
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.FilledIconButton
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -46,236 +41,307 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun TimerScreen(onNavigateToHistory: () -> Unit, viewModel: TimerViewModel = koinViewModel()) {
-    val uiState by viewModel.uiState.collectAsState()
+        val uiState by viewModel.uiState.collectAsState()
 
-    val animatedProgress by
-            animateFloatAsState(
-                    targetValue = uiState.progress,
-                    animationSpec = tween(durationMillis = 300),
-                    label = "progress"
-            )
+        val animatedProgress by
+                animateFloatAsState(
+                        targetValue = uiState.progress,
+                        animationSpec = tween(durationMillis = 300),
+                        label = "progress"
+                )
 
-    Box(
-            modifier =
-                    Modifier.fillMaxSize()
-                            .background(
-                                    Brush.verticalGradient(
-                                            colors = listOf(Color(0xFF1A1A2E), Color(0xFF16213E))
-                                    )
-                            )
-    ) {
-        Column(
-                modifier = Modifier.fillMaxSize().padding(24.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween
+        Box(
+                modifier =
+                        Modifier.fillMaxSize()
+                                .background(
+                                        Brush.verticalGradient(
+                                                colors =
+                                                        listOf(Color(0xFF1A1A2E), Color(0xFF16213E))
+                                        )
+                                )
         ) {
-            // Top Section - Title
-            Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Spacer(modifier = Modifier.height(40.dp))
-                Text(
-                        text = "Focus Timer",
-                        style =
-                                MaterialTheme.typography.headlineMedium.copy(
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color.White
-                                )
-                )
-                Spacer(modifier = Modifier.height(8.dp))
-                Text(
-                        text = if (uiState.isTimerRunning) "Stay focused!" else "Ready to focus?",
-                        style =
-                                MaterialTheme.typography.bodyMedium.copy(
-                                        color = Color.White.copy(alpha = 0.7f)
-                                )
-                )
-            }
-
-            // Middle Section - Timer Circle
-            Box(contentAlignment = Alignment.Center, modifier = Modifier.weight(1f)) {
-                Card(
-                        modifier =
-                                Modifier.size(320.dp)
-                                        .shadow(
-                                                elevation = 20.dp,
-                                                shape = CircleShape,
-                                                ambientColor = Color(0xFF6C63FF).copy(alpha = 0.3f),
-                                                spotColor = Color(0xFF6C63FF).copy(alpha = 0.3f)
-                                        ),
-                        shape = CircleShape,
-                        colors = CardDefaults.cardColors(containerColor = Color(0xFF0F3460))
+                Column(
+                        modifier = Modifier.fillMaxSize().padding(24.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.SpaceBetween
                 ) {
-                    Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-                        // Background Circle
-                        Canvas(modifier = Modifier.size(280.dp)) {
-                            drawArc(
-                                    color = Color.White.copy(alpha = 0.1f),
-                                    startAngle = -90f,
-                                    sweepAngle = 360f,
-                                    useCenter = false,
-                                    style = Stroke(width = 20.dp.toPx(), cap = StrokeCap.Round),
-                                    size = Size(size.width, size.height)
-                            )
+                        // Top Section - Title
+                        Column(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                                Spacer(modifier = Modifier.height(40.dp))
+                                Text(
+                                        text = "Focus Timer",
+                                        style =
+                                                MaterialTheme.typography.headlineMedium.copy(
+                                                        fontWeight = FontWeight.Bold,
+                                                        color = Color.White
+                                                )
+                                )
+                                Spacer(modifier = Modifier.height(8.dp))
+                                Text(
+                                        text =
+                                                if (uiState.isTimerRunning) "Stay focused!"
+                                                else "Ready to focus?",
+                                        style =
+                                                MaterialTheme.typography.bodyMedium.copy(
+                                                        color = Color.White.copy(alpha = 0.7f)
+                                                )
+                                )
                         }
 
-                        // Progress Circle with Gradient
-                        Canvas(modifier = Modifier.size(280.dp)) {
-                            val gradient =
-                                    Brush.sweepGradient(
-                                            colors =
-                                                    listOf(
-                                                            Color(0xFF6C63FF),
-                                                            Color(0xFF5A52D5),
-                                                            Color(0xFF6C63FF)
-                                                    )
-                                    )
-                            drawArc(
-                                    brush = gradient,
-                                    startAngle = -90f,
-                                    sweepAngle = 360f * animatedProgress,
-                                    useCenter = false,
-                                    style = Stroke(width = 20.dp.toPx(), cap = StrokeCap.Round),
-                                    size = Size(size.width, size.height)
-                            )
-                        }
+                        // Middle Section - Timer Circle
+                        Box(contentAlignment = Alignment.Center, modifier = Modifier.weight(1f)) {
+                                Card(
+                                        modifier =
+                                                Modifier.size(320.dp)
+                                                        .shadow(
+                                                                elevation = 20.dp,
+                                                                shape = CircleShape,
+                                                                ambientColor =
+                                                                        Color(0xFF6C63FF)
+                                                                                .copy(alpha = 0.3f),
+                                                                spotColor =
+                                                                        Color(0xFF6C63FF)
+                                                                                .copy(alpha = 0.3f)
+                                                        ),
+                                        shape = CircleShape,
+                                        colors =
+                                                CardDefaults.cardColors(
+                                                        containerColor = Color(0xFF0F3460)
+                                                )
+                                ) {
+                                        Box(
+                                                contentAlignment = Alignment.Center,
+                                                modifier = Modifier.fillMaxSize()
+                                        ) {
+                                                // Background Circle
+                                                Canvas(modifier = Modifier.size(280.dp)) {
+                                                        drawArc(
+                                                                color =
+                                                                        Color.White.copy(
+                                                                                alpha = 0.1f
+                                                                        ),
+                                                                startAngle = -90f,
+                                                                sweepAngle = 360f,
+                                                                useCenter = false,
+                                                                style =
+                                                                        Stroke(
+                                                                                width =
+                                                                                        20.dp.toPx(),
+                                                                                cap =
+                                                                                        StrokeCap
+                                                                                                .Round
+                                                                        ),
+                                                                size = Size(size.width, size.height)
+                                                        )
+                                                }
 
-                        // Time Display
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(
-                                    text = formatTime(uiState.currentTime),
-                                    style =
-                                            MaterialTheme.typography.displayLarge.copy(
-                                                    fontSize = 64.sp,
-                                                    fontWeight = FontWeight.Bold,
-                                                    color = Color.White
-                                            )
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(
-                                    text = "${(animatedProgress * 100).toInt()}%",
-                                    style =
-                                            MaterialTheme.typography.titleMedium.copy(
-                                                    color = Color(0xFF6C63FF),
-                                                    fontWeight = FontWeight.SemiBold
-                                            )
-                            )
-                        }
-                    }
-                }
-            }
+                                                // Progress Circle with Gradient
+                                                Canvas(modifier = Modifier.size(280.dp)) {
+                                                        val gradient =
+                                                                Brush.sweepGradient(
+                                                                        colors =
+                                                                                listOf(
+                                                                                        Color(
+                                                                                                0xFF6C63FF
+                                                                                        ),
+                                                                                        Color(
+                                                                                                0xFF5A52D5
+                                                                                        ),
+                                                                                        Color(
+                                                                                                0xFF6C63FF
+                                                                                        )
+                                                                                )
+                                                                )
+                                                        drawArc(
+                                                                brush = gradient,
+                                                                startAngle = -90f,
+                                                                sweepAngle =
+                                                                        360f * animatedProgress,
+                                                                useCenter = false,
+                                                                style =
+                                                                        Stroke(
+                                                                                width =
+                                                                                        20.dp.toPx(),
+                                                                                cap =
+                                                                                        StrokeCap
+                                                                                                .Round
+                                                                        ),
+                                                                size = Size(size.width, size.height)
+                                                        )
+                                                }
 
-            // Bottom Section - Controls
-            Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier.fillMaxWidth()
-            ) {
-                // Main Control Buttons
-                Row(
-                        horizontalArrangement = Arrangement.Center,
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.fillMaxWidth()
-                ) {
-                    // Stop Button
-                    FilledIconButton(
-                            onClick = { viewModel.stopTimer() },
-                            modifier = Modifier.size(64.dp),
-                            colors =
-                                    IconButtonDefaults.filledIconButtonColors(
-                                            containerColor = Color(0xFFE94560).copy(alpha = 0.2f),
-                                            contentColor = Color(0xFFE94560)
-                                    ),
-                            shape = CircleShape
-                    ) {
-                        Icon(
-                                imageVector = Icons.Default.Stop,
-                                contentDescription = "Stop",
-                                modifier = Modifier.size(32.dp)
-                        )
-                    }
-
-                    Spacer(modifier = Modifier.width(24.dp))
-
-                    // Play/Pause Button (Larger)
-                    FilledIconButton(
-                            onClick = {
-                                if (uiState.isTimerRunning) {
-                                    viewModel.pauseTimer()
-                                } else {
-                                    viewModel.startTimer()
+                                                // Time Display
+                                                Column(
+                                                        horizontalAlignment =
+                                                                Alignment.CenterHorizontally
+                                                ) {
+                                                        Text(
+                                                                text =
+                                                                        formatTime(
+                                                                                uiState.currentTime
+                                                                        ),
+                                                                style =
+                                                                        MaterialTheme.typography
+                                                                                .displayLarge.copy(
+                                                                                fontSize = 64.sp,
+                                                                                fontWeight =
+                                                                                        FontWeight
+                                                                                                .Bold,
+                                                                                color = Color.White
+                                                                        )
+                                                        )
+                                                        Spacer(modifier = Modifier.height(8.dp))
+                                                        Text(
+                                                                text =
+                                                                        "${(animatedProgress * 100).toInt()}%",
+                                                                style =
+                                                                        MaterialTheme.typography
+                                                                                .titleMedium.copy(
+                                                                                color =
+                                                                                        Color(
+                                                                                                0xFF6C63FF
+                                                                                        ),
+                                                                                fontWeight =
+                                                                                        FontWeight
+                                                                                                .SemiBold
+                                                                        )
+                                                        )
+                                                }
+                                        }
                                 }
-                            },
-                            modifier =
-                                    Modifier.size(80.dp)
-                                            .shadow(
-                                                    elevation = 12.dp,
-                                                    shape = CircleShape,
-                                                    ambientColor =
-                                                            Color(0xFF6C63FF).copy(alpha = 0.5f)
-                                            ),
-                            colors =
-                                    IconButtonDefaults.filledIconButtonColors(
-                                            containerColor = Color(0xFF6C63FF),
-                                            contentColor = Color.White
-                                    ),
-                            shape = CircleShape
-                    ) {
-                        Icon(
-                                imageVector =
-                                        if (uiState.isTimerRunning) Icons.Default.Pause
-                                        else Icons.Default.PlayArrow,
-                                contentDescription =
-                                        if (uiState.isTimerRunning) "Pause" else "Start",
-                                modifier = Modifier.size(40.dp)
-                        )
-                    }
+                        }
 
-                    Spacer(modifier = Modifier.width(24.dp))
+                        // Bottom Section - Controls
+                        Column(
+                                horizontalAlignment = Alignment.CenterHorizontally,
+                                modifier = Modifier.fillMaxWidth()
+                        ) {
+                                // Main Control Buttons
+                                Row(
+                                        horizontalArrangement = Arrangement.Center,
+                                        verticalAlignment = Alignment.CenterVertically,
+                                        modifier = Modifier.fillMaxWidth()
+                                ) {
+                                        // Stop Button
+                                        Button(
+                                                onClick = { viewModel.stopTimer() },
+                                                modifier =
+                                                        Modifier.size(
+                                                                width = 100.dp,
+                                                                height = 56.dp
+                                                        ),
+                                                colors =
+                                                        ButtonDefaults.buttonColors(
+                                                                containerColor =
+                                                                        Color(0xFFE94560)
+                                                                                .copy(alpha = 0.2f),
+                                                                contentColor = Color(0xFFE94560)
+                                                        ),
+                                                shape = RoundedCornerShape(28.dp)
+                                        ) { Text(text = "STOP", fontWeight = FontWeight.Bold) }
 
-                    // History Button
-                    FilledIconButton(
-                            onClick = onNavigateToHistory,
-                            modifier = Modifier.size(64.dp),
-                            colors =
-                                    IconButtonDefaults.filledIconButtonColors(
-                                            containerColor = Color.White.copy(alpha = 0.1f),
-                                            contentColor = Color.White
-                                    ),
-                            shape = CircleShape
-                    ) {
-                        Icon(
-                                imageVector = Icons.Default.History,
-                                contentDescription = "History",
-                                modifier = Modifier.size(32.dp)
-                        )
-                    }
-                }
+                                        Spacer(modifier = Modifier.width(16.dp))
 
-                Spacer(modifier = Modifier.height(32.dp))
+                                        // Play/Pause Button (Larger)
+                                        Button(
+                                                onClick = {
+                                                        if (uiState.isTimerRunning) {
+                                                                viewModel.pauseTimer()
+                                                        } else {
+                                                                viewModel.startTimer()
+                                                        }
+                                                },
+                                                modifier =
+                                                        Modifier.size(
+                                                                        width = 120.dp,
+                                                                        height = 64.dp
+                                                                )
+                                                                .shadow(
+                                                                        elevation = 12.dp,
+                                                                        shape =
+                                                                                RoundedCornerShape(
+                                                                                        32.dp
+                                                                                ),
+                                                                        ambientColor =
+                                                                                Color(0xFF6C63FF)
+                                                                                        .copy(
+                                                                                                alpha =
+                                                                                                        0.5f
+                                                                                        )
+                                                                ),
+                                                colors =
+                                                        ButtonDefaults.buttonColors(
+                                                                containerColor = Color(0xFF6C63FF),
+                                                                contentColor = Color.White
+                                                        ),
+                                                shape = RoundedCornerShape(32.dp)
+                                        ) {
+                                                Text(
+                                                        text =
+                                                                if (uiState.isTimerRunning) "PAUSE"
+                                                                else "START",
+                                                        fontWeight = FontWeight.Bold,
+                                                        fontSize = 16.sp
+                                                )
+                                        }
 
-                // Status Text
-                Text(
-                        text =
-                                when {
-                                    uiState.isTimerRunning -> "Timer is running..."
-                                    uiState.currentTime < uiState.totalTime -> "Paused"
-                                    else -> "Tap play to start"
-                                },
-                        style =
-                                MaterialTheme.typography.bodyMedium.copy(
-                                        color = Color.White.copy(alpha = 0.6f)
+                                        Spacer(modifier = Modifier.width(16.dp))
+
+                                        // History Button
+                                        Button(
+                                                onClick = onNavigateToHistory,
+                                                modifier =
+                                                        Modifier.size(
+                                                                width = 100.dp,
+                                                                height = 56.dp
+                                                        ),
+                                                colors =
+                                                        ButtonDefaults.buttonColors(
+                                                                containerColor =
+                                                                        Color.White.copy(
+                                                                                alpha = 0.1f
+                                                                        ),
+                                                                contentColor = Color.White
+                                                        ),
+                                                shape = RoundedCornerShape(28.dp)
+                                        ) {
+                                                Text(
+                                                        text = "HISTORY",
+                                                        fontWeight = FontWeight.Bold,
+                                                        fontSize = 11.sp
+                                                )
+                                        }
+                                }
+
+                                Spacer(modifier = Modifier.height(32.dp))
+
+                                // Status Text
+                                Text(
+                                        text =
+                                                when {
+                                                        uiState.isTimerRunning ->
+                                                                "Timer is running..."
+                                                        uiState.currentTime < uiState.totalTime ->
+                                                                "Paused"
+                                                        else -> "Tap start to begin"
+                                                },
+                                        style =
+                                                MaterialTheme.typography.bodyMedium.copy(
+                                                        color = Color.White.copy(alpha = 0.6f)
+                                                )
                                 )
-                )
 
-                Spacer(modifier = Modifier.height(24.dp))
-            }
+                                Spacer(modifier = Modifier.height(24.dp))
+                        }
+                }
         }
-    }
 }
 
 private fun formatTime(seconds: Long): String {
-    val minutes = seconds / 60
-    val remainingSeconds = seconds % 60
-    return "%02d:%02d".format(minutes, remainingSeconds)
+        val minutes = seconds / 60
+        val remainingSeconds = seconds % 60
+        return "%02d:%02d".format(minutes, remainingSeconds)
 }
